@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://brxt40m2u5ueu"]
+
+[ext_resource type="Script" path="res://CardUI.gd" id="1_cardui"]
+
+[node name="CardUI" type="ColorRect" unique_id=1281228537]
+custom_minimum_size = Vector2(100, 128)
+size_flags_vertical = 0
+mouse_filter = 0
+script = ExtResource("1_cardui")
+
+[node name="Label" type="Label" parent="." unique_id=1003448553]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 11
+text = "CARD_NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true

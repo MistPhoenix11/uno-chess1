@@ -1,0 +1,245 @@
+[gd_scene format=3 uid="uid://bkpf0oi6780yi"]
+
+[ext_resource type="Script" uid="uid://boi68vfjbsnsw" path="res://main_game.gd" id="1_yx7mw"]
+[ext_resource type="Script" uid="uid://b3le62g437v1w" path="res://gridmanager.gd" id="3_gridmgr"]
+[ext_resource type="Script" uid="uid://clb18bw1lbv2y" path="res://board_ui.gd" id="4_boardui"]
+[ext_resource type="Script" uid="uid://xkbj5mqhhrmn" path="res://game_hud.gd" id="5_hud"]
+[ext_resource type="Script" uid="uid://cy73bfrfkk5j2" path="res://chess_clock.gd" id="6_clock"]
+[ext_resource type="Script" uid="uid://d4dmgww3gvx54" path="res://game_over_screen.gd" id="7_gameoverscreen"]
+[ext_resource type="Script" uid="uid://dqml2mkn3s66t" path="res://npc_controller.gd" id="8_npcctrl"]
+[ext_resource type="Script" uid="uid://cg0djd2ajwrva" path="res://tutorial_director.gd" id="9_tutdir"]
+
+[node name="MainGame" type="Node2D" unique_id=1506643706]
+script = ExtResource("1_yx7mw")
+
+[node name="GridManager" type="Node2D" parent="." unique_id=894949054]
+script = ExtResource("3_gridmgr")
+
+[node name="ChessClock" type="Node" parent="." unique_id=1209221712]
+script = ExtResource("6_clock")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=194243456]
+
+[node name="RootHBox" type="HBoxContainer" parent="CanvasLayer" unique_id=636279317]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="SidebarMargin" type="MarginContainer" parent="CanvasLayer/RootHBox" unique_id=176665869]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="GameHUD" type="VBoxContainer" parent="CanvasLayer/RootHBox/SidebarMargin" unique_id=176665870]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+script = ExtResource("5_hud")
+
+[node name="StatusRow" type="HBoxContainer" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD" unique_id=479253144]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="TurnLabel" type="Label" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/StatusRow" unique_id=1755370770]
+layout_mode = 2
+text = "Turn: White (#0)"
+
+[node name="EnergyLabel" type="Label" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/StatusRow" unique_id=1936004163]
+layout_mode = 2
+text = "Energy: 0"
+
+[node name="ClockRow" type="HBoxContainer" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD" unique_id=962363283]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="WhiteClock" type="Label" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/ClockRow" unique_id=578878481]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "♔ 7:30"
+
+[node name="BlackClock" type="Label" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/ClockRow" unique_id=125506897]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "♚ 7:30"
+
+[node name="MessageLabel" type="Label" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD" unique_id=-1447605376]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.7, 1)
+text = "Welcome to UnoChess!"
+autowrap_mode = 3
+
+[node name="PhaseButtons" type="HBoxContainer" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD" unique_id=571059909]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="ConfirmCards" type="Button" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/PhaseButtons" unique_id=1607454983]
+layout_mode = 2
+text = "Confirm Cards & Move"
+
+[node name="SkipMovement" type="Button" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/PhaseButtons" unique_id=227733693]
+layout_mode = 2
+text = "Skip Movement"
+
+[node name="SkipSpecial" type="Button" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/PhaseButtons" unique_id=1646073945]
+layout_mode = 2
+text = "Skip Special"
+
+[node name="EndTurn" type="Button" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/PhaseButtons" unique_id=1961987407]
+layout_mode = 2
+text = "End Turn"
+
+[node name="CastleRow" type="HBoxContainer" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD" unique_id=1620769754]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="CastleKingside" type="Button" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/CastleRow" unique_id=1497215355]
+layout_mode = 2
+text = "Castle Kingside"
+
+[node name="CastleQueenside" type="Button" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/CastleRow" unique_id=276389695]
+layout_mode = 2
+text = "Castle Queenside"
+
+[node name="SkipChoiceRow" type="HBoxContainer" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD" unique_id=1854964199]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="ResistSkip" type="Button" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/SkipChoiceRow" unique_id=84819494]
+layout_mode = 2
+text = "Discard 2 & Resist"
+
+[node name="AcceptSkip" type="Button" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/SkipChoiceRow" unique_id=1414971392]
+layout_mode = 2
+text = "Accept Skip"
+
+[node name="EmergencyRow" type="HBoxContainer" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD" unique_id=552583765]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="AcceptEmergency" type="Button" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/EmergencyRow" unique_id=1044976613]
+layout_mode = 2
+text = "Dump Hand, King Escapes"
+
+[node name="DeclineEmergency" type="Button" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/EmergencyRow" unique_id=1325190581]
+layout_mode = 2
+text = "Decline & Gamble"
+
+[node name="TrapCancelRow" type="HBoxContainer" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD" unique_id=-447676240]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="CancelTrap" type="Button" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/TrapCancelRow" unique_id=-447676239]
+layout_mode = 2
+text = "Cancel Trap"
+
+[node name="HandScroll" type="ScrollContainer" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD" unique_id=918273645]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+horizontal_scroll_mode = 0
+
+[node name="HandContainer" type="FlowContainer" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD/HandScroll" unique_id=918273646]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+
+[node name="ResignButton" type="Button" parent="CanvasLayer/RootHBox/SidebarMargin/GameHUD" unique_id=2100000010]
+layout_mode = 2
+text = "🏳️ Resign"
+
+[node name="BoardPanel" type="Control" parent="CanvasLayer/RootHBox" unique_id=1753549986]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BoardCenter" type="CenterContainer" parent="CanvasLayer/RootHBox/BoardPanel" unique_id=1753549987]
+layout_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 0
+
+[node name="BoardUI" type="Control" parent="CanvasLayer/RootHBox/BoardPanel/BoardCenter" unique_id=125996793]
+layout_mode = 2
+script = ExtResource("4_boardui")
+
+[node name="GameOverScreen" type="Panel" parent="CanvasLayer" unique_id=2100000000]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("7_gameoverscreen")
+
+[node name="DimBG" type="ColorRect" parent="CanvasLayer/GameOverScreen" unique_id=2100000001]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="CenterBox" type="CenterContainer" parent="CanvasLayer/GameOverScreen" unique_id=2100000002]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ResultVBox" type="VBoxContainer" parent="CanvasLayer/GameOverScreen/CenterBox" unique_id=2100000003]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+
+[node name="ResultLabel" type="Label" parent="CanvasLayer/GameOverScreen/CenterBox/ResultVBox" unique_id=2100000004]
+layout_mode = 2
+text = "WHITE WINS"
+horizontal_alignment = 1
+
+[node name="ReasonLabel" type="Label" parent="CanvasLayer/GameOverScreen/CenterBox/ResultVBox" unique_id=2100000005]
+layout_mode = 2
+text = "Checkmate!"
+horizontal_alignment = 1
+
+[node name="StatsGrid" type="GridContainer" parent="CanvasLayer/GameOverScreen/CenterBox/ResultVBox" unique_id=2100000006]
+layout_mode = 2
+columns = 3
+
+[node name="ButtonRow" type="HBoxContainer" parent="CanvasLayer/GameOverScreen/CenterBox/ResultVBox" unique_id=2100000007]
+layout_mode = 2
+alignment = 1
+
+[node name="RematchButton" type="Button" parent="CanvasLayer/GameOverScreen/CenterBox/ResultVBox/ButtonRow" unique_id=2100000008]
+layout_mode = 2
+text = "⚔️ Rematch"
+
+[node name="MenuButton" type="Button" parent="CanvasLayer/GameOverScreen/CenterBox/ResultVBox/ButtonRow" unique_id=681581702]
+layout_mode = 2
+text = "🗺️ Menu"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/GameOverScreen/CenterBox/ResultVBox/ButtonRow" unique_id=2100000009]
+layout_mode = 2
+text = "🚪 Quit"
+
+[node name="NPCController" type="Node" parent="." unique_id=390235881]
+script = ExtResource("8_npcctrl")
+
+[node name="TutorialDirector" type="Node" parent="." unique_id=1677928239]
+script = ExtResource("9_tutdir")
+
+[connection signal="pressed" from="CanvasLayer/RootHBox/SidebarMargin/GameHUD/ResignButton" to="." method="resign"]
