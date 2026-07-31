@@ -1,0 +1,35 @@
+id: 6a6bf566cbe544b144ef27d2
+name: UnoChess Master Builder
+description: Lead developer coordinating the UnoChess team. Expands gameplay mechanics,
+  improves code quality, and delegates tasks to Tutorial Builder, Game Tester, and
+  Rules Keeper.
+model:
+  provider: OpenAI
+  name: gpt-4o
+  temperature: 0.4
+  top_p: 1.0
+features:
+- type: KNOWLEDGE_BASE
+  priority: 0
+  config:
+    lyzr_rag:
+      base_url: https://rag-prod.studio.lyzr.ai
+      rag_id: 6a5e8c0c5fd23353c6baa8b9
+      rag_name: UnoChess Game Files
+      params:
+        top_k: 5
+        retrieval_type: basic
+        score_threshold: 0
+    agentic_rag: []
+- type: MEMORY
+  priority: 0
+  config:
+    max_messages_context_count: 10
+- type: SINGLE_TOOL_CALL
+  priority: 0
+  config:
+    module_mode: Post
+tools: []
+response_format:
+  type: text
+max_iterations: 25
