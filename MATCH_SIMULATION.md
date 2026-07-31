@@ -1,0 +1,1 @@
+Match Simulation Log up to this point is available in the github repo. Make sure to log continues to kip, log each value item in the log, explaining any game costs, and ensuring there are no syntax or other issues.
